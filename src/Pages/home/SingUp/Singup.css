@@ -1,0 +1,22 @@
+@media only screen and (max-width:576px) {
+    .from{
+        width: 100%;
+        margin: 0 auto;
+    }
+    
+}
+
+@media only screen and (min-width:577px) and (max-width:769px) {
+    .from{
+        width: 70%;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (min-width:770px) {
+    .from{
+        width: 75%;
+        margin: 0 auto;
+    }
+    
+}
