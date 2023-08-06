@@ -35,11 +35,8 @@ function SingUp() {
     const handlesubmit = async (event) => {
         event.preventDefault();
         await createUserWithEmailAndPassword(email, password)
-        const success = await updateProfile({ displayName: name });
-        if (success) {
-            toast('Updated Profile')
-        }
-
+        await updateProfile({ displayName: name });
+        toast('Updated Profile')
 
     }
 
@@ -48,7 +45,7 @@ function SingUp() {
     // }
 
     if (user) {
-        console.log(    user);
+        console.log(user);
     }
 
     const handlename = event => {
@@ -85,6 +82,7 @@ function SingUp() {
                 <p>Already have an Account? <Link className='text-danger text-decoration-none' to="/login">Please Login</Link> </p>
                 <p className='text-danger'>{error?.message}</p>
                 <Socialsingup></Socialsingup>
+                <ToastContainer />
             </Form>
         </div>
     );

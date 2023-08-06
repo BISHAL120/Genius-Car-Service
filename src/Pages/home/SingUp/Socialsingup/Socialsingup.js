@@ -8,10 +8,10 @@ import { useNavigate } from 'react-router-dom';
 
 const Socialsingup = () => {
 
-    const [signInWithGoogle, error] = useSignInWithGoogle(auth);
-    const [signInWithFacebook] = useSignInWithFacebook(auth);
-    const [signInWithGithub] = useSignInWithGithub(auth);
-    const [user] = useAuthState(auth);
+    const [signInWithGoogle, user, error] = useSignInWithGoogle(auth);
+    const [signInWithFacebook, user1] = useSignInWithFacebook(auth);
+    const [signInWithGithub, user2] = useSignInWithGithub(auth);
+    // const [user] = useAuthState(auth);
 
     const navigate = useNavigate();
     let errorelement;
@@ -20,7 +20,7 @@ const Socialsingup = () => {
         errorelement = <div><p className='text-danger'>Error: {error.message}</p></div>
     }
 
-    if (user) {
+    if (user || user1 || user2) {
         navigate('/');
     }
 
