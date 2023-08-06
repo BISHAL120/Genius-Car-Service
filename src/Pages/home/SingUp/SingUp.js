@@ -5,21 +5,47 @@ import './Singup.css';
 import { useState } from 'react';
 import auth from '../../Shared/firebase.init';
 import { Link } from 'react-router-dom';
+import SocialLogin from '../Login/SocialLogin/SocialLogin';
+import Socialsingup from './Socialsingup/Socialsingup';
+import { useAuthState, useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 
 
 function SingUp() {
 
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [agree, setAgree] = useState(false);
 
-    const handlesubmit = event => {
+    const [
+        createUserWithEmailAndPassword,
+        loading,
+        error1,
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+
+    const [updateProfile, updating, updateerror] = useUpdateProfile(auth);
+
+    const [user] = useAuthState(auth);
+
+
+    const handlesubmit = async (event) => {
         event.preventDefault();
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
-            })
+        await createUserWithEmailAndPassword(email, password)
+        const success = await updateProfile({ displayName: name });
+        if (success) {
+            alert('Updated Profile')
+        }
 
+
+    }
+
+    if (user) {
+        console.log(    user);
+    }
+
+    const handlename = event => {
+        setName(event.target.value);
     }
 
     const handleemail = event => {
@@ -35,24 +61,23 @@ function SingUp() {
             <Form className='from' onSubmit={handlesubmit}>
                 <h2 className='text-primary text-center'>Please Sing UP</h2>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control onBlur={handleemail} type="email" placeholder="Enter email" required />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
+                    <Form.Control onBlur={handlename} type="text" placeholder="Enter Name" required />
                 </Form.Group>
-
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Control onBlur={handleemail} type="email" placeholder="Enter email" required />
+                </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
                     <Form.Control onBlur={handlepassword} type="password" placeholder="Password" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
+                    <Form.Check className={agree ? 'text-primary' : 'text-danger'} onClick={() => setAgree(!agree)} type="checkbox" label="Accept Genius car Terms And Condition" />
                 </Form.Group>
-                <p>Already have an Account? <Link className='text-danger text-decoration-none' to="/login">Please Login</Link> </p>
-                <Button variant="primary" type="submit">
+                <Button disabled={!agree} variant="primary w-50 mx-auto d-block mb-2" type="submit">
                     Sing Up
                 </Button>
+                <p>Already have an Account? <Link className='text-danger text-decoration-none' to="/login">Please Login</Link> </p>
+                <p className='text-danger'>{error?.message}</p>
+                <Socialsingup></Socialsingup>
             </Form>
         </div>
     );

@@ -8,6 +8,8 @@ import Login from './Pages/home/Login/Login';
 import ServiceDetail from './Pages/ServiceDetail/ServiceDetail';
 import NotFound from './Pages/Shared/NotFound/NotFound';
 import SingUp from './Pages/home/SingUp/SingUp';
+import Checkout from './Pages/Checkout/Checkout';
+import Requreauth from './Pages/Requreauth/Requreauth';
 
 function App() {
   return (
@@ -19,6 +21,11 @@ function App() {
         <Route path='/about' element={<About></About>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/singup' element={<SingUp></SingUp>}></Route>
+        <Route path='/checkout' element={
+          <Requreauth>
+            <Checkout></Checkout>
+          </Requreauth>
+        }></Route>
         <Route path='/service/:serviceid' element={<ServiceDetail></ServiceDetail>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
