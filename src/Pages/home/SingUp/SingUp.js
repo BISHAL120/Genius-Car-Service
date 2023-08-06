@@ -8,6 +8,9 @@ import { Link } from 'react-router-dom';
 import SocialLogin from '../Login/SocialLogin/SocialLogin';
 import Socialsingup from './Socialsingup/Socialsingup';
 import { useAuthState, useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import Loading from '../../Shared/Loading/Loading';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function SingUp() {
@@ -34,11 +37,15 @@ function SingUp() {
         await createUserWithEmailAndPassword(email, password)
         const success = await updateProfile({ displayName: name });
         if (success) {
-            alert('Updated Profile')
+            toast('Updated Profile')
         }
 
 
     }
+
+    // if(loading || updating){
+    //     return <Loading></Loading>
+    // }
 
     if (user) {
         console.log(    user);
