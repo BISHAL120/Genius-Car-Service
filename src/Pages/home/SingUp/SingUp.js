@@ -36,13 +36,10 @@ function SingUp() {
         event.preventDefault();
         await createUserWithEmailAndPassword(email, password)
         await updateProfile({ displayName: name });
-        toast('Updated Profile')
+        toast('Verification Email Send');
 
     }
 
-    // if(loading || updating){
-    //     return <Loading></Loading>
-    // }
 
     if (user) {
         console.log(user);

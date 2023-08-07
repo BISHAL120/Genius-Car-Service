@@ -40,8 +40,13 @@ const Login = () => {
     }
 
     const resrtpassword = async () => {
+       if(email){
         await sendPasswordResetEmail(email);
         toast('Email Send');
+       }
+       else{
+        toast('Please enter your email address')
+       }
     }
 
     if (user) {
@@ -65,8 +70,8 @@ const Login = () => {
                     <Button variant="primary w-50 mx-auto d-block mb-2" type="submit">
                         Login
                     </Button>
-                    <p>New to Genius Car? <Link className='text-danger text-decoration-none' to="/singup">Please SingUp</Link> </p>
                     <p>Forget Password<button onClick={resrtpassword} className='btn btn-link text-danger text-decoration-none'>Reset Please</button> </p>
+                    <p>New to Genius Car? <Link className='text-danger text-decoration-none' to="/singup">Please SingUp</Link> </p>
                     <SocialLogin></SocialLogin>
                     <ToastContainer />
                 </Form>

@@ -6,6 +6,7 @@ import { useAuthState, useSignInWithFacebook, useSignInWithGithub, useSignInWith
 import auth from '../../../Shared/firebase.init';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../../Shared/Loading/Loading';
+import './Sociallogin.css';
 
 const SocialLogin = () => {
 
@@ -22,7 +23,7 @@ const SocialLogin = () => {
         </div>;
     }
 
-    if (loading || loading1 || loading2){
+    if (loading || loading1 || loading2) {
         return <Loading></Loading>
     }
 
@@ -37,40 +38,42 @@ const SocialLogin = () => {
 
     const handlefacebooksingin = () => {
         signInWithFacebook();
-}
+    }
 
-const handlegithubsingin = () => {
-    signInWithGithub();
-}
+    const handlegithubsingin = () => {
+        signInWithGithub();
+    }
 
-return (
-    <div>
-        <div className='d-flex align-items-center'>
-            <div style={{ height: '1.7px', background: 'rgb(127, 127, 127, 0.5)' }} className='w-50 '></div>
-            <div className='mt-2 px-3'><p>or</p></div>
-            <div style={{ height: '1.7px', background: 'rgb(127, 127, 127, 0.5)' }} className='w-50 '></div>
+    return (
+        <div>
+            <div className='d-flex align-items-center'>
+                <div style={{ height: '1.7px', background: 'rgb(127, 127, 127, 0.5)' }} className='w-50 '></div>
+                <div className='mt-2 px-3'><p>or</p></div>
+                <div style={{ height: '1.7px', background: 'rgb(127, 127, 127, 0.5)' }} className='w-50 '></div>
+            </div>
+            {errorelement}
+            <div className='mx-auto'>
+                <div className='d-flex justify-content-center mt-3 social-btns mx-auto'>
+                    <button onClick={handlegooglesingin} className=' btn btn-primary w-100 aline-center d-flex aling-items-center justify-content-center'>
+                        <img className='mx-3' style={{ width: '25px', height: '25px' }} src={google} alt="" />
+                        Google Sing In
+                    </button>
+                </div>
+                <div className='d-flex justify-content-center mt-3 social-btns mx-auto'>
+                    <button onClick={handlefacebooksingin} className=' btn btn-primary w-100 aline-center d-flex aling-items-center justify-content-center'>
+                        <img className='mx-3' style={{ width: '25px', height: '25px' }} src={facebook} alt="" />
+                        Facebook Sing In
+                    </button>
+                </div>
+                <div className='d-flex justify-content-center mt-3 social-btns mx-auto'>
+                    <button onClick={handlegithubsingin} className=' btn btn-primary w-100 aline-center d-flex aling-items-center justify-content-center'>
+                        <img className='mx-3' style={{ width: '30px', height: '30px' }} src={github} alt="" />
+                        Github Sing In
+                    </button>
+                </div>
+            </div>
         </div>
-        {errorelement}
-        <div className='d-flex justify-content-center mt-3'>
-            <button onClick={handlegooglesingin} className='btn btn-primary w-50 aline-center d-flex aling-items-center justify-content-center'>
-                <img className='mx-3' style={{ width: '25px', height: '25px' }} src={google} alt="" />
-                Google Sing In
-            </button>
-        </div>
-        <div className='d-flex justify-content-center mt-3'>
-            <button onClick={handlefacebooksingin} className='btn btn-primary w-50 aline-center d-flex aling-items-center justify-content-center'>
-                <img className='mx-3' style={{ width: '25px', height: '25px' }} src={facebook} alt="" />
-                Facebook Sing In
-            </button>
-        </div>
-        <div className='d-flex justify-content-center mt-3'>
-            <button onClick={handlegithubsingin} className='btn btn-primary w-50 aline-center d-flex aling-items-center justify-content-center'>
-                <img className='mx-3' style={{ width: '30px', height: '30px' }} src={github} alt="" />
-                Github Sing In
-            </button>
-        </div>
-    </div>
-);
+    );
 };
 
 export default SocialLogin;
